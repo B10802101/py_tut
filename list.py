@@ -11,7 +11,7 @@
 # for fruit in fruits:
 #     print(fruit)
 
-#  for num,fruit in enumerate(fruits, start=122):
+#  for num,fruit in enumerate(fruits, start=122):  #num is index, fruit is content
 #      print(num, fruit)
 
 ##list is mutable tuple is unmutable    ##Only for access values and cant be changed
