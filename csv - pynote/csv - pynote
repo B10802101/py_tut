@@ -1,0 +1,21 @@
+#csv file: a text file, first line indicate the title and class, each line is seperated by comma
+# # Name,Age,Location
+# # Alice,28,New York
+# # Bob,22,Los Angeles
+# # Charlie,31,San Francisco
+import csv
+import os
+# with open('example.csv', 'r') as file_name:
+#     csv_reader = csv.DictReader(file_name)                                                  #csv_reader is a register for reading file
+#     with open('example_copy', 'w') as copy_file:
+#         field_name = ["QuotaAmount", "StartDate", "OwnerName", "Username"]                  #access the class in origin csv file             
+#         csv_writer = csv.DictWriter(copy_file, fieldnames = field_name, delimiter = '\t')   #csv_writer is a register for writing file
+#         for line in csv_reader:
+#             del line["QuotaAmount"]                                                         #delete "QuotaAmount" class in csv_reader register
+#             csv_writer.writerow(line)                                                       #take out contents in csv_writer and write rows into copy file
+
+# os.chdir('./csv - pynote')                                                                  #print the csv file in dictionary type
+# with open('example.csv', 'r') as file_name:                                                 #can use next(csv_reader) to skip a line in order to filt unused lines
+#     csv_reader = csv.DictReader(file_name)
+#     for line in csv_reader:
+#         print(line)

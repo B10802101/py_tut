@@ -17,3 +17,4 @@ for f in os.listdir():
     new_f_name1, new_f_name2 = os.path.split(" - ")
     new_f_name = "{} - {}".format(new_f_name2, new_f_name1)
     os.rename(f, new_f_name)
+
