@@ -24,3 +24,7 @@
 # Num2 = {'1','4'}
 # print(Num2.intersection(Num1))
 #123
+
+# lis = [-1, -6, 9, 8, 5]
+# new_lis = sorted(lis, key = abs)      #use key = abs can sory by absolute
+# print(new_lis)
