@@ -8,13 +8,14 @@ import os
 #print(os.listdir())
 
 os.chdir('/Users/WD/source/repos/B10802101/py_tut')
-#print(os.listdir(os.getcwd()))
+# print(os.listdir(os.getcwd()))
 for f in os.listdir():
     if f == ".git" or f == ".vs":
         continue
     f_name, f_ext = os.path.splitext(f)
     print(f_name)
-    new_f_name1, new_f_name2 = os.path.split(" - ")
-    new_f_name = "{} - {}".format(new_f_name2, new_f_name1)
-    os.rename(f, new_f_name)
-
+    # new_f_name1 = f_name.split(".")
+    # print(new_f_name1)
+    
+    # new_f_name = "{}{}".format(new_f_name1, '.py')
+    # os.rename(f, new_f_name)
