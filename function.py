@@ -14,3 +14,6 @@ def student(*args, **kwargs):
     print(args)
     print(kwargs)
 student(*([1,2,3]),**( {"name" : "andy", "age" : 10}))
+
+def addition (x, y):
+    return x + y
