@@ -10,17 +10,23 @@ import requests
 # print(os.listdir())                                                          #list all the files in a directory into a tuple
 ################################################################
 
-os.chdir('./csv.py')
-with open('example.csv', 'r') as file_name:                                                 #file_name is a variable of the file example.csv
-    csv_reader = csv.DictReader(file_name)                                                  #csv_reader is a register for reading file in Dict type
-    with open('example_copy', 'w') as copy_file:                                            #copy_file is a variable of the file example_copy
-        field_name = ["QuotaAmount", "StartDate", "OwnerName", "Username"]                  #accessing the class in origin csv file             
-        csv_writer = csv.DictWriter(copy_file, fieldnames = field_name, delimiter = '\t')   #csv_writer is a register for writing file in Dict type
-        for line in csv_reader:
-            del line["QuotaAmount"]                                                         #delete "QuotaAmount" class in csv_reader register
-            csv_writer.writerow(line)                                                       #take out contents in csv_writer and write rows into copy file
-            print(line)
+# os.chdir('./csv.py')
+# with open('example.csv', 'r') as file_name:                                                 #file_name is a variable of the file example.csv
+#     csv_reader = csv.DictReader(file_name)                                                  #csv_reader is a register for reading file in Dict type
+#     with open('example_copy', 'w') as copy_file:                                            #copy_file is a variable of the file example_copy
+#         field_name = ["QuotaAmount", "StartDate", "OwnerName", "Username"]                  #accessing the class in origin csv file             
+#         csv_writer = csv.DictWriter(copy_file, fieldnames = field_name, delimiter = '\t')   #csv_writer is a register for writing file in Dict type
+#         for line in csv_reader:
+#             del line["QuotaAmount"]                                                         #delete "QuotaAmount" class in csv_reader register
+#             csv_writer.writerow(line)                                                       #take out contents in csv_writer and write rows into copy file
+#             print(line)
 
+################################################################################################
+
+with open('example.csv', 'w') as f:
+    file_name, file_ext = os.path.splitext(".\csv.py\example.csv")
+    new_file_name = file_name + "123"
+    os.rename('.\csv.py\example.csv', new_file_name)
 ################################################################################################
 # #seize image URL and copy onto a new file
 # r = requests.get(input())                          #https://images.nationalgeographic.org/image/upload/t_edhub_resource_key_image/v1652341068/EducationHub/photos/ocean-waves.jpg
