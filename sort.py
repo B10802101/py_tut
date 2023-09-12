@@ -1,4 +1,3 @@
-#lambda: use to built a function easily
 class student():
     def __init__(self, name, age):                              #constructor
         self.name = name
@@ -12,6 +11,6 @@ def stsort(st):
 st1 = student('Bob', 13)
 st2 = student('Andy', 12)
 stli = [st1, st2]
-new_stli = sorted(stli, key = lambda st: st.age, reverse=True)
+new_stli = sorted(stli, key = lambda st: st.age, reverse=True)             #lambda: use to built a function easily
 print(new_stli)
 print(stli.sort(key = lambda st: st.age, reverse=True))

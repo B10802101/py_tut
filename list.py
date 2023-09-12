@@ -15,15 +15,14 @@
 #      print(num, fruit)
 
 ##list is mutable tuple is unmutable    ##Only for access values and cant be changed
-# fruits = ('Apple', 'Banana')
-# fruits[0] = 'Grape'
-# print(fruits[0])
+fruits = ('Apple', 'Banana')
+fruits[0] = 'Grape'
+print(fruits[0])
 
 ##Sets  #intersection(Num), difference(Num), Union(Num)
 # Num1 = {'1','2','3','4'}
 # Num2 = {'1','4'}
 # print(Num2.intersection(Num1))
-#123
 
 # lis = [-1, -6, 9, 8, 5]
 # new_lis = sorted(lis, key = abs)      #use key = abs can sory by absolute

@@ -10,4 +10,3 @@ while x<5:
     if x == 2:
         break   #jump out of the loop immediately
     x += 1
-    
