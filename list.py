@@ -1,29 +1,44 @@
-#fruits = ['Apple', 'Banana']    #fruits[-1] is the last element
-# print(fruits[0:1]) # print(fruits[:2]) # print(fruits[0:]) 
-#fruits.append('grape') #fruits.insert(0,'grape') 
-#extend vs append
-#print(fruits.pop() == "Banana")
-#reverse(), sort()
-#sorted_fruits = sorted(fruits)
+fruits = ['egg', 'Banana', 'Apple']
+numbers = [1, 3, 2, 5, 9]
+# numbers[-1] is the last element
+# extend(), append(), insert(), pop(), reverse(), sort(): no return value
+# print(fruits[0:1]) # print(fruits[:2]) # print(fruits[0:])
 #min max sum
 #index()
 
-# for fruit in fruits:
-#     print(fruit)
+###########################sort vs sorted##############################
 
-#  for num,fruit in enumerate(fruits, start=122):  #num is index, fruit is content
-#      print(num, fruit)
+# fruits.sort(key = lambda x: len(x))
+# print(fruits)
+# newfruits = fruits.sort(key = lambda x: len(x))
+# print(newfruits)
+
+#######################################################################
+
+# print(max(numbers))
+# print(max(fruits))
+
+#######################################################################
+
+# for fruit in fruits:            #print elements
+#     print(fruit)
+# print(fruits)                   # print list
+
+#######################################################################
+
+# for num,fruit in enumerate(fruits, start=122):  #num is index, fruit is content
+#     print(num, fruit)
+
+############Tuple######################################################
 
 ##list is mutable tuple is unmutable    ##Only for access values and cant be changed
-fruits = ('Apple', 'Banana')
-fruits[0] = 'Grape'
-print(fruits[0])
+fruitstuple = ('Apple', 'Banana')
+#fruits[0] = 'Grape'
+print(fruitstuple[0])
+
+#############Set#######################################################
 
 ##Sets  #intersection(Num), difference(Num), Union(Num)
 # Num1 = {'1','2','3','4'}
 # Num2 = {'1','4'}
 # print(Num2.intersection(Num1))
-
-# lis = [-1, -6, 9, 8, 5]
-# new_lis = sorted(lis, key = abs)      #use key = abs can sory by absolute
-# print(new_lis)
