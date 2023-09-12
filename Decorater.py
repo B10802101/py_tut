@@ -8,9 +8,10 @@ def Bark(func):
         print('Now is running {}'.format(func.__name__))                        #the modified content
         func()                                              #the origin function
     return wrapper2
+
 @Bark
 @printfunc
-def printfunc2():
+def printfunc2():                                           #origin function
     print('Now is running printfunc3')
 
 printfunc2()
