@@ -24,7 +24,7 @@ import requests
 #             print(line)
 
 ################################################################################################
-
+# cant rename a file using with open()
 # with open('ML_practice.py', 'r') as f:
 #     file_name, file_ext = os.path.splitext(f.name)
 #     new_file_name = file_name + '_9/14' + file_ext
@@ -32,7 +32,7 @@ import requests
 
 ################################################################################################
 
-# #seize image URL and copy onto a new file
+#seize image URL and copy onto a new file
 # r = requests.get(input())                          #https://images.nationalgeographic.org/image/upload/t_edhub_resource_key_image/v1652341068/EducationHub/photos/ocean-waves.jpg
 # while True:
 #     if r.ok == True:                          #if URL is exist
@@ -67,11 +67,11 @@ import requests
 #         f_content = f.read(3)
 
 ###########Copy a image file######################################################################
-os.chdir('./csv')
-with open("image.jpg",'rb') as fr:
-    with open("image_copy.jpg",'wb') as fw:
-        chunksize = 300
-        fr_chunkcontent = fr.read(chunksize)
-        while len(fr_chunkcontent) > 0:
-            fw.write(fr_chunkcontent)                   #seize fr_chunkcontent to write into fw
-            fr_chunkcontent = fr.read(chunksize)
+# os.chdir('./csv')
+# with open("image.jpg",'rb') as fr:
+#     with open("image_copy.jpg",'wb') as fw:
+#         chunksize = 300
+#         fr_chunkcontent = fr.read(chunksize)
+#         while len(fr_chunkcontent) > 0:
+#             fw.write(fr_chunkcontent)                   #seize fr_chunkcontent to write into fw
+#             fr_chunkcontent = fr.read(chunksize)

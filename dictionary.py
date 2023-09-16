@@ -1,7 +1,12 @@
-student1 = {'name': 'Andy', 'age': 13, 'courses': ['math', 'english']}
-student2 = {'name': 'Andy', 'age': 13, 'courses': ['math', 'physics']}
+student1 = {'name': 'Andy', 'age': 13, 'courses': ['math', 'english'], 'gender': 'female'}
+student2 = {'name': 'Johnny', 'age': 13, 'courses': ['math', 'physics']}
 student3 = {'name': 'Cindy', 'age': 11, 'courses': ['math', 'english']}
-
+long_dict = {}
+for i in range(1,101):
+    key = 'key_{}'.format(i)        #key_1, key_2, key_3...
+    value = i
+    long_dict[key] = value
+# print(long_dict)
 ##################Combine two dict############################################################
 
 # student1.update(student2)                   # combine two dictionaries, if the key already exists, the value will be overwritten by student2
@@ -10,10 +15,11 @@ student3 = {'name': 'Cindy', 'age': 11, 'courses': ['math', 'english']}
 
 ##################Delete key and value in a dict##############################################
 
-# pop = student1.pop('name')
-# print(pop)
+# storage1 = student1.pop('name', 'age')
+# print(storage1)
 # print(student1)
-# student1['name'] = 'Andy'
+
+# student1['name'] = 'Andy'                   # create a new key and value
 # print(student1)
 
 ##################print the key and value in a dict###########################################
@@ -23,8 +29,11 @@ student3 = {'name': 'Cindy', 'age': 11, 'courses': ['math', 'english']}
 
 ##################sorting a dict##############################################################
 
-# stlist = [student1, student3]
-# newstlist = sorted(stlist, key=lambda x: len(x['name']), reverse = True)
+stlist = [student1, student2, student3]
+print(stlist)
+stlist.sort(key = lambda x: len(x['name']), reverse = True)
+print(stlist)
+# newstlist = sorted(stlist, key = lambda x: len(x['name']), reverse = True)
 # print(newstlist)
 
 ##################Commands####################################################################
