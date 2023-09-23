@@ -4,8 +4,8 @@ import torch.nn.functional as F
 import torchvision
 from torchvision import transforms
 from torch.utils.data import DataLoader
-num_epochs = 4
-batch_size = 10
+num_epochs = 1
+batch_size = 5
 learning_rate = 0.001
 
 class CNN(nn.Module):                           #Inherit from pytorch module
@@ -33,12 +33,14 @@ train_dataset = torchvision.datasets.MNIST(root='./data', train=True, transform=
 test_dataset = torchvision.datasets.MNIST(root='./data', train=False, transform=transforms.ToTensor(), download=False)
 
 train_loader = DataLoader(dataset = train_dataset, batch_size = batch_size, shuffle = True)
-test_loader = DataLoader(dataset = train_dataset, batch_size = batch_size, shuffle = True)
+test_loader = DataLoader(dataset = test_dataset, batch_size = batch_size, shuffle = True)
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+model.to(device)
+print(device)
 
 criterion = nn.CrossEntropyLoss()
-optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)
+optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
 
 n_total_steps = len(train_loader)
 for epoch in range(num_epochs):

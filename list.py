@@ -1,16 +1,19 @@
 fruits = ['egg', 'Banana', 'Apple']
 numbers = [1, 3, 2, 5, 9]
-# numbers[-1] is the last element
+
+# print(numbers[-1]) 
 # extend(), append(), insert(), pop(), reverse(), sort(): no return value
-# print(fruits[0:1]) # print(fruits[:2]) # print(fruits[0:])
-#min max sum
-#index()
+# fruits.extend(numbers)
+# print(fruits)
+# print(fruits[0:1]) # print(fruits[ :2]) # print(fruits[0: ])
+# min max sum
+# index()
 
 ###########################sort vs sorted##############################
 
 # fruits.sort(key = lambda x: len(x))
 # print(fruits)
-# newfruits = fruits.sort(key = lambda x: len(x))
+# newfruits = sorted(fruits, key = lambda x: len(x), reverse = True)
 # print(newfruits)
 
 #######################################################################
@@ -26,19 +29,20 @@ numbers = [1, 3, 2, 5, 9]
 
 #######################################################################
 
-# for num,fruit in enumerate(fruits, start=122):  #num is index, fruit is content
-#     print(num, fruit)
+# for num,fruit in enumerate(fruits):  #num is index, fruit is content
+#     print('index :{}'.format(num), 'element is: {}'.format(fruit))
 
 ############Tuple######################################################
 
-##list is mutable tuple is unmutable    ##Only for access values and cant be changed
-fruitstuple = ('Apple', 'Banana')
-#fruits[0] = 'Grape'
-print(fruitstuple[0])
+#list is mutable tuple is unmutable    ##Only for access values and cant be changed
+# fruitstuple = ('Apple', 'Banana')
+# print(fruitstuple[0])
+# print(fruitstuple[1])
 
 #############Set#######################################################
 
 ##Sets  #intersection(Num), difference(Num), Union(Num)
-# Num1 = {'1','2','3','4'}
-# Num2 = {'1','4'}
-# print(Num2.intersection(Num1))
+Num1 = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+Num2 = {1, 4}
+diff = Num1.difference(Num2)
+print(Num1)
