@@ -5,7 +5,8 @@ from matplotlib import pyplot as plt
 import pandas as pd
 import numpy as np
 import torch
-print(torch.cuda.is_available())
+device = torch.device("cuda")
+print(device)
 # csvpath = './cleaned_all_phones.csv'
 # data = pd.read_csv(csvpath).sample(frac = 1, random_state = 2).reset_index(drop=True)
 # train_data = data[:700]
