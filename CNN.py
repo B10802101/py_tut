@@ -5,7 +5,7 @@ import torchvision
 from torchvision import transforms
 from torch.utils.data import DataLoader
 num_epochs = 1
-batch_size = 5
+batch_size = 1
 learning_rate = 0.001
 
 class CNN(nn.Module):                           #Inherit from pytorch module
