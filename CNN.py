@@ -6,12 +6,8 @@ from torchvision import transforms
 from torch.utils.data import DataLoader
 from torch.utils.data import random_split
 from sklearn.model_selection import KFold
-num_epochs = 1
-<<<<<<< HEAD
+num_epochs = 5
 batch_size = 1
-=======
-batch_size = 10
->>>>>>> 24cf2623e993d01812a4b0a3cbfe2a2977f8371c
 learning_rate = 0.001
 num_folds = 5
 
@@ -51,10 +47,11 @@ model.to(device)
 criterion = nn.CrossEntropyLoss()
 optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
 
-
+best_accuracy = 0
 for fold, (train_index, valid_index) in enumerate(kf.split(train_dataset.data, train_dataset.targets)):
     print(f'Fold {fold + 1}/{num_folds}')
-    train_subset, valid_subset = train_dataset.data[train_index], train_dataset[valid_index]
+    train_subset = torch.utils.data.Subset(train_dataset, train_index) 
+    valid_subset = torch.utils.data.Subset(train_dataset, valid_index)
     train_loader = DataLoader(dataset = train_subset, batch_size = batch_size, shuffle = True)
     valid_loader = DataLoader(dataset = valid_subset, batch_size = batch_size, shuffle = True)
     n_total_steps = len(train_loader)
@@ -89,6 +86,10 @@ for fold, (train_index, valid_index) in enumerate(kf.split(train_dataset.data, t
                 correct += (predicted == labels).sum().item()
             valid_accuracy = 100.0 * correct / total
             print('Validation Accuracy: {}'.format(valid_accuracy))
+            if valid_accuracy > best_accuracy:
+                print('saving better model...')
+                best_accuracy = valid_accuracy
+                torch.save(model.state_dict(), 'best_model.pth')
 
 print('Finished Training')
 
@@ -107,12 +108,19 @@ with torch.no_grad():
         n_samples += labels.size(0)
         n_correct += (predicted == labels).sum().item()
 
-        for i in range(batch_size):
-            label = labels[i]
-            pred = predicted[i]
-            if (label == pred):
-                n_class_correct[label] += 1
-            n_class_samples[label] += 1
+        #for batch size = 1
+        label = labels.item()
+        pred = predicted.item()
+        if (label == pred):
+            n_class_correct[label] += 1
+        n_class_samples[label] += 1
+
+        # for i in range(batch_size):
+        #     label = labels[i]
+        #     pred = predicted[i]
+        #     if (label == pred):
+        #         n_class_correct[label] += 1
+        #     n_class_samples[label] += 1
 
     acc = 100.0 * n_correct / n_samples
     print(f'Accuracy of the network: {acc} %')
