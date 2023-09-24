@@ -4,9 +4,12 @@ import torch.nn.functional as F
 import torchvision
 from torchvision import transforms
 from torch.utils.data import DataLoader
+from torch.utils.data import random_split
+from sklearn.model_selection import KFold
 num_epochs = 1
-batch_size = 5
+batch_size = 10
 learning_rate = 0.001
+num_folds = 5
 
 class CNN(nn.Module):                           #Inherit from pytorch module
     def __init__(self):                         #Constructor, to init the param of the model
@@ -19,11 +22,11 @@ class CNN(nn.Module):                           #Inherit from pytorch module
         self.fc2 = nn.Linear(1000, 100)
         self.fc3 = nn.Linear(100, 10)
     def forward(self,x):
-        x = self.pool1(F.relu(self.conv1(x)))
-        x = self.pool2(F.relu(self.conv2(x)))
+        x = self.pool1(F.leaky_relu(self.conv1(x)))
+        x = self.pool2(F.leaky_relu(self.conv2(x)))
         x = torch.flatten(x,1)
-        x = F.relu(self.fc1(x))
-        x = F.relu(self.fc2(x))
+        x = F.leaky_relu(self.fc1(x))
+        x = F.leaky_relu(self.fc2(x))
         x = self.fc3(x)
         return x
 
@@ -31,36 +34,57 @@ model = CNN()
 
 train_dataset = torchvision.datasets.MNIST(root='./data', train=True, transform=transforms.ToTensor(), download=True)
 test_dataset = torchvision.datasets.MNIST(root='./data', train=False, transform=transforms.ToTensor(), download=False)
-
-train_loader = DataLoader(dataset = train_dataset, batch_size = batch_size, shuffle = True)
+# train_size = int(0.8*len(train_dataset))
+# valid_size = len(train_dataset) - train_size
+# train_dataset, valid_dataset = random_split(train_dataset, [train_size, valid_size])
 test_loader = DataLoader(dataset = test_dataset, batch_size = batch_size, shuffle = True)
+
+kf = KFold(n_splits=num_folds, shuffle=True, random_state=4)
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 model.to(device)
-print(device)
 
 criterion = nn.CrossEntropyLoss()
 optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
 
-n_total_steps = len(train_loader)
-for epoch in range(num_epochs):
-    for i, (images, labels) in enumerate(train_loader):
-        images = images.to(device)
-        labels = labels.to(device)
-        
-        # init optimizer
-        optimizer.zero_grad()
-        
-        # forward -> backward -> update
-        outputs = model(images)
-        loss = criterion(outputs, labels)
-        
-        loss.backward()
 
-        optimizer.step()
+for fold, (train_index, valid_index) in enumerate(kf.split(train_dataset.data, train_dataset.targets)):
+    print(f'Fold {fold + 1}/{num_folds}')
+    train_subset, valid_subset = train_dataset.data[train_index], train_dataset[valid_index]
+    train_loader = DataLoader(dataset = train_subset, batch_size = batch_size, shuffle = True)
+    valid_loader = DataLoader(dataset = valid_subset, batch_size = batch_size, shuffle = True)
+    n_total_steps = len(train_loader)
+    for epoch in range(num_epochs):
+        for i, (images, labels) in enumerate(train_loader):
+            images = images.to(device)
+            labels = labels.to(device)
+            
+            # init optimizer
+            optimizer.zero_grad()
+            
+            # forward -> backward -> update
+            outputs = model(images)
+            loss = criterion(outputs, labels)
+            
+            loss.backward()
 
-        if (i + 1) % 1000 == 0:
-            print(f'epoch {epoch+1}/{num_epochs}, step {i+1}/{n_total_steps}, loss = {loss.item():.4f}')
+            optimizer.step()
+
+            if (i + 1) % 1000 == 0:
+                print(f'epoch {epoch+1}/{num_epochs}, step {i+1}/{n_total_steps}, loss = {loss.item():.4f}')
+        model.eval()
+        with torch.no_grad():
+            correct = 0
+            total = 0
+            for images, labels in valid_loader:
+                images = images.to(device)
+                labels = labels.to(device)
+                outputs = model(images)
+                _, predicted = torch.max(outputs.data, 1)
+                total += labels.size(0)
+                correct += (predicted == labels).sum().item()
+            valid_accuracy = 100.0 * correct / total
+            print('Validation Accuracy: {}'.format(valid_accuracy))
 
 print('Finished Training')
 
