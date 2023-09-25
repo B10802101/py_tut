@@ -2,11 +2,16 @@
 import csv
 import os
 from matplotlib import pyplot as plt
-import pandas as pd
-import numpy as np
 import torch
-device = torch.device("cuda")
-print(device)
+import numpy as np
+import torchvision as tv 
+from torch.utils.data import DataLoader
+train_data = tv.datasets.MNIST('MNIST/', train = True, transform=None, download=True)
+print(len(train_data))
+for i in range(5,7):
+    x = train_data.data[i]
+    plt.imshow(x)
+    plt.show()
 # csvpath = './cleaned_all_phones.csv'
 # data = pd.read_csv(csvpath).sample(frac = 1, random_state = 2).reset_index(drop=True)
 # train_data = data[:700]
